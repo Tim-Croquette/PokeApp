@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
-import { from } from 'rxjs';
+import { UserService } from '../shared/services/user-service.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -12,7 +12,12 @@ import { from } from 'rxjs';
 export class SignUpComponent {
   signUpForm!: FormGroup;
 
+  constructor(
+    private userService: UserService
+  ) {}
+
   ngOnInit(): void {
+    
     this.signUpForm = new FormGroup({
       email: new FormControl<string|null>(null, [
         Validators.required, 
@@ -33,10 +38,11 @@ export class SignUpComponent {
 
   signUp(){
     if(this.signUpForm.valid){
-      console.log(this.signUpForm.value);
+      this.userService.signUp(this.signUpForm.value);
     } else {
-      console.log("wrong datas");
+      console.log("Wrong datas")
     }
+    
   }
 
   public validateInput(field: string, error: string) {
