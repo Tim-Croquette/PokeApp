@@ -1,0 +1,3 @@
+POST§/sign-up§noToken
+POST§/sign-in§noToken
+POST§/refresh-token§validToken
