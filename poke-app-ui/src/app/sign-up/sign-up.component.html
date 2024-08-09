@@ -1,0 +1,41 @@
+<h1 class="m-sm-5">Sign up</h1>
+<form class="mx-sm-5 mb-5" [formGroup]="signUpForm" (ngSubmit)="signUp()" appSamePasswordValidator>
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input type="email" class="form-control" id="email" formControlName="email">
+      @if(validateInput("email", "required")){
+        <p class="text-danger form-text">This field is required</p>
+      }
+      @else if (validateInput("email", "email")) {
+        <p class="text-danger form-text">This must be an email</p>
+      }
+      @else {
+        <div id="emailHelp" class="form-text">Please enter your personal email address</div>
+      }
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">Password</label>
+      <input type="password" class="form-control" id="password" formControlName="password">
+      @if (validateInput("password", "required")){
+        <div id="passwordHelp" class="form-text text-danger">This field is required</div>
+      }
+      @else if (validateInput("password", "pattern")) {
+        <div id="passwordHelp" class="form-text text-danger">Your password should be between 8 to 20 characters and includes at least 1 cap, 1 lower case, 1 digit and 1 special char</div>
+      }
+      @else {
+        <div id="passwordHelp" class="form-text">Enter a super safe password, e.g Garfield2024!</div>
+      }
+    </div>
+    <div class="mb-3">
+        <label for="confirmPassword" class="form-label">Confirm your password</label>
+        <input type="password" class="form-control" id="confirmPassword" formControlName="confirmPassword">
+        @if (validateInput("confirmPassword", "required")) {
+          <div id="confirmPasswordHelp" class="form-text text-danger">This field is required</div>
+        } @else if (validateForm()) {
+          <div id="confirmPasswordHelp" class="form-text text-danger">The confirmation password and the password should be the same</div>
+        } @else {
+          <div id="confirmPasswordHelp" class="form-text">Please confirm your password</div>
+        }
+      </div>
+    <button type="submit" class="btn btn-primary w-100">Sign up</button>
+  </form>
